@@ -1,0 +1,107 @@
+﻿<Window x:Class="Cryptocurrencies.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
+        xmlns:Menu="clr-namespace:Cryptocurrencies.Utilities"
+        mc:Ignorable="d" 
+        Height="450" 
+        Width="800" 
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles/Icon.xaml" />
+    </Window.Resources>
+
+    <Window.DataContext>
+        <vm:NavigationVM/>
+    </Window.DataContext>
+
+    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Border Background="Black"
+                CornerRadius="20"/>
+
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1">
+
+                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding HomeCommand}"
+                                    IsChecked="True">
+                        <Grid>
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Home"/>
+                        </Grid>
+
+                    </Menu:NavButton>
+
+                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding DetailsCommand}"
+                                    IsChecked="False">
+                        <Grid>
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                      Text="Currency details"/>
+                        </Grid>
+
+                    </Menu:NavButton>
+
+                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding ConventerCommand}"
+                                    IsChecked="False">
+                        <Grid>
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Converter"/>
+                        </Grid>
+
+                    </Menu:NavButton>
+
+                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding SettingsCommand}"
+                                    IsChecked="False">
+                        <Grid>
+                            <TextBlock Style="{StaticResource TextStyle}"
+                                       Text="Settings"/>
+                        </Grid>
+                    </Menu:NavButton>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3">
+                    <Button
+                            Style="{StaticResource IconButtonStyle}" 
+                            Tag="{StaticResource CollapseIcon}" 
+                            Margin="0,0,5,0"/>
+                    <Button 
+                            Style="{StaticResource IconButtonStyle}" 
+                            Tag="{StaticResource FullscreenIcon}"
+                            Margin="0,0,5,0"/>     
+                    <Button 
+                            Style="{StaticResource IconButtonStyle}" 
+                            Tag="{StaticResource CloseIcon}"
+                            Margin="0,0,5,0"/>
+                </StackPanel>
+                
+                                
+            </Grid>
+
+            <Grid Grid.Row="1">
+                
+                <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
+                    xmlns:view="clr-namespace:Cryptocurrencies.View">
+    
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:Home/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:DetailsVM}">
+        <view:Details/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ConverterVM}">
+        <view:Converter/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingsVM}">
+        <view:Settings/>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -25,10 +25,30 @@ namespace Cryptocurrencies
         {
             if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
             {
-                // Переміщення вікна
                 this.DragMove();
             }
         }
 
+        private void CollapseButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.WindowState = WindowState.Minimized;
+        }
+
+        private void FullScreenButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (mainWindow.WindowState != WindowState.Maximized)
+            {
+                mainWindow.WindowState = WindowState.Maximized;
+            }
+            else 
+            {
+                mainWindow.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

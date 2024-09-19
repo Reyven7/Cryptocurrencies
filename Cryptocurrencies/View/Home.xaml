@@ -3,11 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Cryptocurrencies.View"
+             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:HomeVM/>
+    </UserControl.DataContext>
     
     <Grid Background="Transparent">
         <Border CornerRadius="0,0,20,20" Background="PaleGoldenrod"/>
+
+        <TextBlock Text="Top Cryptocurrencies"
+                   FontSize="24"/>
+
+        <DataGrid ItemsSource="{Binding Cryptocurrencies}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Price Usd"
+                                    Binding="{Binding PriceUsd}"/>
+                <DataGridTextColumn Header="Price Change"
+                                    Binding="{Binding PriceChange}"/>
+                <DataGridTextColumn Header="Change Percent 24Hr"
+                                    Binding="{Binding ChangePercent24Hr}"/>
+                <DataGridTextColumn/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

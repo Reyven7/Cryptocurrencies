@@ -1,13 +1,5 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Cryptocurrencies
 {
@@ -23,27 +15,20 @@ namespace Cryptocurrencies
 
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+            if (e.ButtonState == MouseButtonState.Pressed)
             {
-                this.DragMove();
+                DragMove();
             }
         }
 
         private void CollapseButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.WindowState = WindowState.Minimized;
+            Window.WindowState = WindowState.Minimized;
         }
 
         private void FullScreenButton_Click(object sender, RoutedEventArgs e)
         {
-            if (mainWindow.WindowState != WindowState.Maximized)
-            {
-                mainWindow.WindowState = WindowState.Maximized;
-            }
-            else 
-            {
-                mainWindow.WindowState = WindowState.Normal;
-            }
+            Window.WindowState = Window.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

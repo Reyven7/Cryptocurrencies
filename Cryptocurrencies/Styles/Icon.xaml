@@ -11,14 +11,21 @@
     <Grid x:Key="FullscreenIcon">
         <Viewbox Stretch="Fill">
             <Path Data="M2,9 L0,9 L0,14 L5,14 L5,12 L2,12 L2,9 L2,9 Z M0,5 L2,5 L2,2 L5,2 L5,0 L0,0 L0,5 L0,5 Z M12,12 L9,12 L9,14 L14,14 L14,9 L12,9 L12,12 L12,12 Z M9,0 L9,2 L12,2 L12,5 L14,5 L14,0 L9,0 L9,0 Z"
-                  Fill="White"/>
+                  Fill="White" />
         </Viewbox>
     </Grid>
 
     <Grid x:Key="CollapseIcon">
         <Viewbox Stretch="Fill">
             <Path Data="M33.5,18.75H1.5a1.25,1.25,0,0,1,0-2.5h32a1.25,1.25,0,0,1,0,2.5Z"
-                  Fill="White"/>
+                  Fill="White" />
+        </Viewbox>
+    </Grid>
+
+    <Grid x:Key="SearchIcon">
+        <Viewbox Stretch="Fill">
+            <Path Data="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"
+                  Fill="White" />
         </Viewbox>
     </Grid>
 

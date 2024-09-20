@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cryptocurrencies.ViewModels
 {
-    class ConverterVM : ViewModelBase
+    class ConverterVm : ViewModelBase
     {
     }
 }

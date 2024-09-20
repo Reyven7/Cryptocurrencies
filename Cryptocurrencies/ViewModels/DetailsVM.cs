@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cryptocurrencies.ViewModels
 {
-    class DetailsVM : Utilities.ViewModelBase
+    class DetailsVm : Utilities.ViewModelBase
     {
     }
 }

@@ -3,19 +3,19 @@
                     xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
                     xmlns:view="clr-namespace:Cryptocurrencies.View">
     
-    <DataTemplate DataType="{x:Type vm:HomeVM}">
+    <DataTemplate DataType="{x:Type vm:HomeVm}">
         <view:Home/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:DetailsVM}">
+    <DataTemplate DataType="{x:Type vm:DetailsVm}">
         <view:Details/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ConverterVM}">
+    <DataTemplate DataType="{x:Type vm:ConverterVm}">
         <view:Converter/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:SettingsVM}">
+    <DataTemplate DataType="{x:Type vm:SettingsVm}">
         <view:Settings/>
     </DataTemplate>
 

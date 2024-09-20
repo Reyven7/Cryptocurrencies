@@ -1,22 +1,18 @@
 ﻿using Cryptocurrencies.Models;
 using Cryptocurrencies.Utilities;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Cryptocurrencies.ViewModels
 {
-    class HomeVM : ViewModelBase
+    class HomeVm : ViewModelBase
     {
-        public HomeVM() => LoadCryptocurrencyData();
+        public HomeVm() => Task.Run(LoadCryptocurrencyData);
 
         private ObservableCollection<Cryptocurrency> _cryptocurrencies;
+
         public ObservableCollection<Cryptocurrency> Cryptocurrencies
         {
             get => _cryptocurrencies;
@@ -29,16 +25,24 @@ namespace Cryptocurrencies.ViewModels
 
         private static async Task<List<Cryptocurrency>> GetCryptocurrencyData()
         {
-            using HttpClient client = new();
-            var response = await client.GetStringAsync("https://api.coincap.io/v2/assets?limit=10");
-            var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse>(response);
-            return coinCapResponse?.Data ?? [];
+            try
+            {
+                using HttpClient client = new();
+                var response = await client.GetStringAsync("https://api.coincap.io/v2/assets?limit=13");
+                var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse>(response);
+                return coinCapResponse?.Data ?? [];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching cryptocurrency data: {ex.Message}");
+                return [];
+            }
         }
 
         public async Task LoadCryptocurrencyData()
         {
             var cryptocurrencies = await GetCryptocurrencyData();
-            if (cryptocurrencies != null && cryptocurrencies.Count > 0)
+            if (cryptocurrencies is { Count: > 0 })
             {
                 Cryptocurrencies = new ObservableCollection<Cryptocurrency>(cryptocurrencies);
             }

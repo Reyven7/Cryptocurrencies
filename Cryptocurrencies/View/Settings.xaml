@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:Cryptocurrencies.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="Transparent">
+             Background="CadetBlue"
+             Style="{StaticResource Page_Style}">
     <Grid>
-        <Border Background="DimGray" 
-        CornerRadius="0, 0, 20, 20"/>
+
     </Grid>
 </UserControl>

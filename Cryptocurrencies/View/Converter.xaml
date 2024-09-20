@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Cryptocurrencies.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="Transparent">
+             Background="Black"
+             Style="{StaticResource Page_Style}">
     <Grid>
-        <Border Background="BurlyWood" CornerRadius="0,0,20,20"/>
     </Grid>
 </UserControl>

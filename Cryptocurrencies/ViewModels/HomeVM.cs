@@ -12,14 +12,13 @@ namespace Cryptocurrencies.ViewModels
         public HomeVm() => Task.Run(LoadCryptocurrencyData);
 
         private ObservableCollection<Cryptocurrency> _cryptocurrencies;
-
         public ObservableCollection<Cryptocurrency> Cryptocurrencies
         {
             get => _cryptocurrencies;
             set
             {
                 _cryptocurrencies = value;
-                OnPropertyChanged(nameof(Cryptocurrencies));
+                OnPropertyChanged();
             }
         }
 
@@ -28,8 +27,8 @@ namespace Cryptocurrencies.ViewModels
             try
             {
                 using HttpClient client = new();
-                var response = await client.GetStringAsync("https://api.coincap.io/v2/assets?limit=13");
-                var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse>(response);
+                var response = await client.GetStringAsync("https://api.coincap.io/v2/assets?limit=15");
+                var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse<Cryptocurrency>>(response);
                 return coinCapResponse?.Data ?? [];
             }
             catch (Exception ex)

@@ -8,8 +8,17 @@ using System.Windows.Input;
 
 namespace Cryptocurrencies.ViewModels
 {
-    class NavigationVm : ViewModelBase
+    internal class NavigationVm : ViewModelBase
     {
+        private readonly SelectedItem _selectedItem = SelectedItem.Instance;
+
+        private object _currentView;
+        private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched;
+        private string _searchQuery;
+        private bool _isPopupOpen;
+        private string _cryptoId;
+        private Cryptocurrency _selectedCryptocurrency;
+
         public NavigationVm()
         {
             HomeCommand = new RelayCommand(Home);
@@ -19,11 +28,6 @@ namespace Cryptocurrencies.ViewModels
 
             CurrentView = new HomeVm();
         }
-
-        private object _currentView;
-        private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched;
-        private string _searchQuery;
-        private bool _isPopupOpen;
 
         public object CurrentView
         {
@@ -37,8 +41,19 @@ namespace Cryptocurrencies.ViewModels
             set
             {
                 _searchQuery = value;
-                OnPropertyChanged(nameof(SearchQuery));
+                OnPropertyChanged();
                 SearchCryptocurrencies();
+            }
+        }
+
+        public Cryptocurrency SelectedCryptocurrency
+        {
+            get => _selectedCryptocurrency;
+            set
+            {
+                _selectedCryptocurrency = value;
+                OnPropertyChanged();
+                CryptoId = _selectedCryptocurrency.Id;
             }
         }
 
@@ -48,34 +63,21 @@ namespace Cryptocurrencies.ViewModels
             set
             {
                 _isPopupOpen = value;
-                OnPropertyChanged(nameof(IsPopupOpen));
+                OnPropertyChanged();
             }
         }
 
-        public ICommand HomeCommand { get; set; }
-        public ICommand DetailsCommand { get; set; }
-        public ICommand ConverterCommand { get; set; }
-        public ICommand SettingsCommand { get; set; }
-
-        private void Home(object obg) => CurrentView = new HomeVm();
-        private void Details(object obg) => CurrentView = new DetailsVm();
-        private void Converter(object obg) => CurrentView = new ConverterVm();
-        private void Settings(object obg) => CurrentView = new SettingsVm();
-
-        private static async Task<List<Cryptocurrency>> GetCryptocurrencyBySearch(string query)
+        public string CryptoId
         {
-            try
+            get => _cryptoId;
+            set
             {
-                using HttpClient client = new();
-                var response = await client.GetStringAsync($"https://api.coincap.io/v2/assets?search={query}");
-                var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse>(response);
-                return coinCapResponse?.Data ?? [];
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error fetching cryptocurrency data: {ex.Message}");
-                return [];
+                _cryptoId = value;
+                OnPropertyChanged();
+                if (DetailsCommand.CanExecute(null))
+                {
+                    DetailsCommand.Execute(null);
+                }
             }
         }
 
@@ -86,6 +88,30 @@ namespace Cryptocurrencies.ViewModels
             {
                 _cryptocurrenciesSearched = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public ICommand HomeCommand { get; set; }
+        public ICommand DetailsCommand { get; set; }
+        public ICommand ConverterCommand { get; set; }
+        public ICommand SettingsCommand { get; set; }
+
+        private void Home(object obg) => CurrentView = new HomeVm();
+
+        private void Converter(object obg) => CurrentView = new ConverterVm();
+
+        private void Settings(object obg) => CurrentView = new SettingsVm();
+
+        private void Details(object obg)
+        {
+            if (!string.IsNullOrEmpty(CryptoId))
+            {
+                _selectedItem.Item = CryptoId;
+                CurrentView = new DetailsVm();
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid cryptocurrency.");
             }
         }
 
@@ -100,6 +126,22 @@ namespace Cryptocurrencies.ViewModels
             var searchResults = await GetCryptocurrencyBySearch(SearchQuery);
             CryptocurrenciesSearched = new ObservableCollection<Cryptocurrency>(searchResults);
             IsPopupOpen = searchResults.Count > 0;
+        }
+
+        private static async Task<List<Cryptocurrency>> GetCryptocurrencyBySearch(string query)
+        {
+            try
+            {
+                using HttpClient client = new();
+                var response = await client.GetStringAsync($"https://api.coincap.io/v2/assets?search={query}");
+                var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse<Cryptocurrency>>(response);
+                return coinCapResponse?.Data ?? [];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching cryptocurrency data: {ex.Message}");
+                return [];
+            }
         }
     }
 }

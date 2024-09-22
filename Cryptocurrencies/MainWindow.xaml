@@ -7,8 +7,8 @@
         xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
         xmlns:Menu="clr-namespace:Cryptocurrencies.Utilities"
         mc:Ignorable="d" 
-        Height="450" 
-        Width="800" 
+        Height="480" 
+        Width="960" 
         Background="Black"
         AllowsTransparency="True"
         WindowStyle="None">
@@ -75,9 +75,11 @@
                       PlacementTarget="{Binding ElementName=SearchBox}" StaysOpen="False">
 
                         <Border Background="White" BorderThickness="1">
-                            <ListBox MaxHeight="150"
-                                 DisplayMemberPath="Name"
-                                 ItemsSource="{Binding CryptocurrenciesSearched}">
+                            <ListBox MaxHeight="175"
+                                     MinWidth="200"
+                                     DisplayMemberPath="Name"
+                                     ItemsSource="{Binding CryptocurrenciesSearched}"
+                                     SelectedItem="{Binding SelectedCryptocurrency}">
                             </ListBox>
                         </Border>
                     </Popup>

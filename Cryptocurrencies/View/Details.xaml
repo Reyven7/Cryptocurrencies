@@ -1,13 +1,102 @@
 ﻿<UserControl x:Class="Cryptocurrencies.View.Details"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Cryptocurrencies.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="DarkCyan"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             mc:Ignorable="d"
+             d:DesignHeight="480" d:DesignWidth="960"
              Style="{StaticResource Page_Style}">
+
+    <UserControl.DataContext>
+        <vm:DetailsVm />
+    </UserControl.DataContext>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.5*" />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Row="0" ColumnSpan="2" Grid.Column="0" Background="Black">
+            <lvc:CartesianChart Series="{Binding Series}" 
+                                ZoomMode="Both"
+                                Background="Black"/>
+        </Grid>
+
+        <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Markets}"
+                  VerticalScrollBarVisibility="Disabled"
+                  Style="{StaticResource DarkDataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Market"
+                                    Binding="{Binding ExchangeId}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Price"
+                                    Binding="{Binding PriceUsd, StringFormat=C}"
+                                    Width="*" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <DataGrid ItemsSource="{Binding SelectedCryptocurrency }"
+                      Style="{StaticResource DarkDataGridStyle}"
+                      Grid.Row="1" Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Price"
+                                        Binding="{Binding PriceUsd, StringFormat=C}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Avg Price 24Hr"
+                                        Binding="{Binding Vwap24Hr, StringFormat=C}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Change % 24Hr"
+                                        Binding="{Binding ChangePercent24Hr}"
+                                        Width="*" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="0" DataContext="{Binding SelectedCryptocurrency}"
+                  Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource HeaderTextStyle}"
+                           Text="{Binding Name}"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextStyle}">
+                    <TextBlock.Inlines>
+                        <Run Text=" Rank"/>
+                        <Run Text="{Binding Rank}"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+            </Grid>
+            <DataGrid ItemsSource="{Binding SelectedCryptocurrency }"
+                      Style="{StaticResource DarkDataGridStyle}"
+                      Grid.Row="2" Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Supply"
+                                        Binding="{Binding Supply, StringFormat=N}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Max Supply"
+                                        Binding="{Binding MaxSupply, StringFormat=C}"
+                                        Width="*" />
+                    <DataGridTextColumn Header="Volume 24Hr"
+                                        Binding="{Binding VolumeUsd24Hr}"
+                                        Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

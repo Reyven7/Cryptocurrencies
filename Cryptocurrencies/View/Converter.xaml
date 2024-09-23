@@ -3,11 +3,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Cryptocurrencies.View"
+             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
              mc:Ignorable="d"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Black"
              Style="{StaticResource Page_Style}">
+    <UserControl.DataContext>
+        <vm:ConverterVm></vm:ConverterVm>
+    </UserControl.DataContext>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="4*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+    
+        <TextBlock Grid.Column="1"
+                   Text="Cryptocurrency Converter "
+                   Style="{StaticResource HeaderTextStyle}" />
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="3" Grid.ColumnSpan="2" Background="#FF151515"
+                    CornerRadius="20">
+            </Border>
+
+            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Count}"
+                     MaxWidth="100" 
+                     MinHeight="28"/>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+                <ComboBox 
+                          MaxWidth="200" IsEditable="True"
+                          ItemsSource="{Binding CryptocurrenciesSearched}"
+                          SelectedItem="{Binding CurrencyToConvert}"
+                          SelectedIndex="0"
+                          DisplayMemberPath="Name"/>
+              
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <ComboBox
+                          MaxWidth="200" IsEditable="True"
+                          ItemsSource="{Binding CryptocurrenciesSearched}"
+                          SelectedItem="{Binding CurrencyConverted}"
+                          SelectedIndex="0"
+                          DisplayMemberPath="Name"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                       Foreground="White"
+                       Text="{Binding Result}"
+                       HorizontalAlignment="Center"/>
+            
+            <!--Text="1 Bitcoin = 63 469,89 United States Dollar &quot;$&quot; (USD)"-->
+        </Grid>
+
+        <Button Grid.Row="2" Grid.Column="1"
+                Style="{StaticResource ButtonStyle}"
+                Content="Convert" 
+                Command="{Binding ConvertCommand}"/>
     </Grid>
 </UserControl>

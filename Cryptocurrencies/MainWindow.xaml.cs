@@ -13,14 +13,6 @@ namespace Cryptocurrencies
             InitializeComponent();
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ButtonState == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
         private void CollapseButton_Click(object sender, RoutedEventArgs e)
         {
             Window.WindowState = WindowState.Minimized;

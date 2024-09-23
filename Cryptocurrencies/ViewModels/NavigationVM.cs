@@ -53,7 +53,12 @@ namespace Cryptocurrencies.ViewModels
             {
                 _selectedCryptocurrency = value;
                 OnPropertyChanged();
-                CryptoId = _selectedCryptocurrency.Id;
+                if (_selectedCryptocurrency != null)
+                {
+                    CryptoId = _selectedCryptocurrency.Id;
+                    ClosePopupAndReset();
+                    CurrentView = new DetailsVm();
+                }
             }
         }
 
@@ -106,7 +111,7 @@ namespace Cryptocurrencies.ViewModels
         {
             if (!string.IsNullOrEmpty(CryptoId))
             {
-                _selectedItem.Item = CryptoId;
+                _selectedItem.SearchItem = CryptoId;
                 CurrentView = new DetailsVm();
             }
             else
@@ -142,6 +147,16 @@ namespace Cryptocurrencies.ViewModels
                 MessageBox.Show($"Error fetching cryptocurrency data: {ex.Message}");
                 return [];
             }
+        }
+
+        private void ClosePopupAndReset()
+        {
+            IsPopupOpen = false;
+            SearchQuery = _selectedCryptocurrency.Name;
+            OnPropertyChanged(nameof(SearchQuery));
+
+            _selectedCryptocurrency = null;
+            OnPropertyChanged(nameof(SelectedCryptocurrency));
         }
     }
 }

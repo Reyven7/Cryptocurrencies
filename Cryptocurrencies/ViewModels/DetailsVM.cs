@@ -1,20 +1,18 @@
 ﻿using Cryptocurrencies.Models;
 using Cryptocurrencies.Utilities;
+using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows;
-using LiveChartsCore;
-using LiveChartsCore.Defaults;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
 
 namespace Cryptocurrencies.ViewModels
 {
     internal class DetailsVm : ViewModelBase
     {
-        private readonly string _cryptoId = SelectedItem.Instance.Item;
+        private readonly string _cryptoId = SelectedItem.Instance.SearchItem;
 
         public DetailsVm()
         {
@@ -23,7 +21,6 @@ namespace Cryptocurrencies.ViewModels
             LoadMarketById();
         }
 
-        public Axis[]? XAxes { get; set; }
         public ISeries[]? Series { get; set; }
 
         private ObservableCollection<Cryptocurrency>? _selectedCryptocurrency;
@@ -50,7 +47,7 @@ namespace Cryptocurrencies.ViewModels
             {
                 using HttpClient client = new();
                 var response = await client.GetStringAsync($"https://api.coincap.io/v2/assets/{id}");
-                var coinCapSingleResponse = JsonConvert.DeserializeObject<CoinCapSingleResponse>(response);
+                var coinCapSingleResponse = JsonConvert.DeserializeObject<CoinCapSingleResponse<Cryptocurrency>>(response);
                 SelectedCryptocurrency = [coinCapSingleResponse?.Data];
 
                 await LoadCandlestickData();
@@ -100,8 +97,6 @@ namespace Cryptocurrencies.ViewModels
 
         private async Task LoadCandlestickData()
         {
-
-            MessageBox.Show("Loading candlestick data...");
             var data = await GetCandlestickData(_cryptoId);
 
             Series =
@@ -114,19 +109,7 @@ namespace Cryptocurrencies.ViewModels
                 }
             ];
 
-            XAxes =
-            [
-                new Axis
-                {
-                    LabelsRotation = 15,
-                    Labels = data
-                        .Select(x => x.Date.ToString("yyyy MMM dd"))
-                        .ToArray(),
-                }
-            ];
-
             OnPropertyChanged(nameof(Series));
-            OnPropertyChanged(nameof(XAxes));
         }
     }
 }

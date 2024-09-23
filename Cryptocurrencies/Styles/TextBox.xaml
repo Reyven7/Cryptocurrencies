@@ -48,4 +48,41 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="TextBoxStyle"
+           TargetType="TextBox">
+        <Setter Property="Background" 
+                Value="#1C1C1C"/>
+        <Setter Property="Foreground" 
+                Value="White"/>
+        <Setter Property="FontSize" 
+                Value="14"/>
+        <Setter Property="BorderThickness" 
+                Value="0"/>
+        <Setter Property="Padding"
+                Value="10,0,25,0"/>
+        <Setter Property="VerticalAlignment" 
+                Value="Center"/>
+        <Setter Property="Height"
+                Value="20"/>
+        <Setter Property="MinWidth"
+                Value="200"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Border x:Name="border"
+                                CornerRadius="15"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1.5"
+                                BorderBrush="WhiteSmoke">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

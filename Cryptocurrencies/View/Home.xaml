@@ -28,6 +28,7 @@
             <DataGrid ItemsSource="{Binding Cryptocurrencies}"
                       Style="{StaticResource DarkDataGridStyle}"
                       VerticalScrollBarVisibility="Disabled"
+                      HorizontalScrollBarVisibility="Disabled"
                       Grid.Row="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Rank"

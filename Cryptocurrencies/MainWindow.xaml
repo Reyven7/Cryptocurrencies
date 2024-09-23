@@ -5,13 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
-        xmlns:Menu="clr-namespace:Cryptocurrencies.Utilities"
+        xmlns:menu="clr-namespace:Cryptocurrencies.Utilities"
         mc:Ignorable="d" 
+        Margin="7"
         Height="480" 
         Width="960" 
-        Background="Black"
-        AllowsTransparency="True"
-        WindowStyle="None">
+
+        Background="Black" WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True">
 
     <Window.DataContext>
         <vm:NavigationVm/>
@@ -21,22 +21,25 @@
         <ResourceDictionary Source="Styles/Icon.xaml" />
     </Window.Resources>
 
-    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-        <Grid >
+        <WindowChrome.WindowChrome>
+            <WindowChrome CaptionHeight="5" ResizeBorderThickness="3"/>
+        </WindowChrome.WindowChrome>
+
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" MinHeight="35"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid>
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-
-                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" >
+                    
+                    <menu:NavButton Style="{StaticResource NavButtonStyle}"
                                     Command="{Binding HomeCommand}"
                                     IsChecked="True">
                         <Grid>
@@ -44,9 +47,9 @@
                                        Text="Home"/>
                         </Grid>
 
-                    </Menu:NavButton>
+                    </menu:NavButton>
 
-                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                <menu:NavButton Style="{StaticResource NavButtonStyle}"
                                     Command="{Binding ConverterCommand}"
                                     IsChecked="False">
                         <Grid>
@@ -54,40 +57,43 @@
                                        Text="Converter"/>
                         </Grid>
 
-                    </Menu:NavButton>
+                    </menu:NavButton>
 
-                    <Menu:NavButton Style="{StaticResource ButtonStyle}"
+                <menu:NavButton Style="{StaticResource NavButtonStyle}"
                                     Command="{Binding SettingsCommand}"
                                     IsChecked="False">
                         <Grid>
                             <TextBlock Style="{StaticResource TextStyle}"
                                        Text="Settings"/>
                         </Grid>
-                    </Menu:NavButton>
+                    </menu:NavButton>
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBox x:Name="SearchBox"
                              Style="{StaticResource SearchBoxStyle}"
-                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,5"/>
 
                     <Popup IsOpen="{Binding IsPopupOpen, Mode=TwoWay}"
-                      PlacementTarget="{Binding ElementName=SearchBox}" StaysOpen="False">
+                           PlacementTarget="{Binding ElementName=SearchBox}" 
+                           StaysOpen="False">
 
                         <Border Background="White" BorderThickness="1">
                             <ListBox MaxHeight="175"
                                      MinWidth="200"
                                      DisplayMemberPath="Name"
                                      ItemsSource="{Binding CryptocurrenciesSearched}"
-                                     SelectedItem="{Binding SelectedCryptocurrency}">
+                                     SelectedItem="{Binding SelectedCryptocurrency}"
+                                     Background="Black"
+                                     Foreground="White"
+                                     BorderBrush="Black">
                             </ListBox>
                         </Border>
                     </Popup>
 
-                   
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
                     <Button
                             Style="{StaticResource IconButtonStyle}" 
                             Tag="{StaticResource CollapseIcon}" 
@@ -104,13 +110,10 @@
                             Margin="0,0,10,0"
                             Click="CloseButton_Click"/>
                 </StackPanel>
-
             </Grid>
 
-            <Grid Grid.Row="1">
-
-                <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
-            </Grid>
+        <Grid Grid.Row="1">
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
         </Grid>
     </Grid>
 </Window>

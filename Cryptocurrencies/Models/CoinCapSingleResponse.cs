@@ -1,7 +1,7 @@
 ﻿namespace Cryptocurrencies.Models
 {
-    public class CoinCapSingleResponse
+    public class CoinCapSingleResponse<T>
     {
-        public Cryptocurrency? Data { get; set; }
+        public T? Data { get; set; }
     }
 }

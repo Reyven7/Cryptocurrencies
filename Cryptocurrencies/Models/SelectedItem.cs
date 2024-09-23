@@ -18,7 +18,8 @@
             }
         }
 
-        public string Item { get; set; } = string.Empty;
+        public string SearchItem { get; set; } = string.Empty;
+        public string FirstItem { get; set; } = string.Empty;
+        public string SecondItem { get; set; } = string.Empty;
     }
-
 }

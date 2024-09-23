@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d"
+
              d:DesignHeight="480" d:DesignWidth="960"
              Style="{StaticResource Page_Style}">
 
@@ -22,7 +23,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2.5*" />
         </Grid.ColumnDefinitions>
-
 
         <Grid Grid.Row="0" ColumnSpan="2" Grid.Column="0" Background="Black">
             <lvc:CartesianChart Series="{Binding Series}" 
@@ -58,7 +58,7 @@
                                         Binding="{Binding PriceUsd, StringFormat=C}"
                                         Width="*" />
                     <DataGridTextColumn Header="Avg Price 24Hr"
-                                        Binding="{Binding Vwap24Hr, StringFormat=C}"
+                                        Binding="{Binding Vwap24Hr, StringFormat=N}"
                                         Width="*" />
                     <DataGridTextColumn Header="Change % 24Hr"
                                         Binding="{Binding ChangePercent24Hr}"

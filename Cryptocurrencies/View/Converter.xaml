@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
              mc:Ignorable="d"
-             xmlns:hc="https://handyorg.github.io/handycontrol"
 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="Black"
@@ -58,6 +57,7 @@
                           ItemsSource="{Binding CryptocurrenciesSearched}"
                           SelectedItem="{Binding CurrencyToConvert}"
                           SelectedIndex="0"
+
                           DisplayMemberPath="Name"/>
               
             </StackPanel>
@@ -75,8 +75,6 @@
                        Foreground="White"
                        Text="{Binding Result}"
                        HorizontalAlignment="Center"/>
-            
-            <!--Text="1 Bitcoin = 63 469,89 United States Dollar &quot;$&quot; (USD)"-->
         </Grid>
 
         <Button Grid.Row="2" Grid.Column="1"

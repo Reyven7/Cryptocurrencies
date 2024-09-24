@@ -48,8 +48,22 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
-                <RowDefinition/>
+                <RowDefinition />
             </Grid.RowDefinitions>
+            <Grid DataContext="{Binding SelectedCryptocurrency[0]}" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource HeaderTextStyle}" 
+                           Text="{Binding Name}"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextStyle}">
+                    <TextBlock.Inlines>
+                        <Run Text=" Rank"/>
+                        <Run Text="{Binding Rank}"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+            </Grid>
             <DataGrid ItemsSource="{Binding SelectedCryptocurrency }"
                       Style="{StaticResource DarkDataGridStyle}"
                       Grid.Row="1" Grid.Column="0">
@@ -66,35 +80,19 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-
-            <Grid Grid.Row="0" DataContext="{Binding SelectedCryptocurrency}"
-                  Background="Black">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Style="{StaticResource HeaderTextStyle}"
-                           Text="{Binding Name}"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextStyle}">
-                    <TextBlock.Inlines>
-                        <Run Text=" Rank"/>
-                        <Run Text="{Binding Rank}"/>
-                    </TextBlock.Inlines>
-                </TextBlock>
-            </Grid>
-            <DataGrid ItemsSource="{Binding SelectedCryptocurrency }"
-                      Style="{StaticResource DarkDataGridStyle}"
-                      Grid.Row="2" Grid.Column="0">
+            <DataGrid ItemsSource="{Binding SelectedCryptocurrency}"
+                    Style="{StaticResource DarkDataGridStyle}"
+                    Grid.Row="2" Grid.Column="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Supply"
-                                        Binding="{Binding Supply, StringFormat=N}"
-                                        Width="*" />
+                                      Binding="{Binding Supply, StringFormat=N}"
+                                      Width="*" />
                     <DataGridTextColumn Header="Max Supply"
-                                        Binding="{Binding MaxSupply, StringFormat=C}"
-                                        Width="*" />
+                                      Binding="{Binding MaxSupply, StringFormat=C}"
+                                      Width="*" />
                     <DataGridTextColumn Header="Volume 24Hr"
-                                        Binding="{Binding VolumeUsd24Hr}"
-                                        Width="*" />
+                                      Binding="{Binding VolumeUsd24Hr}"
+                                      Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

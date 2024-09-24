@@ -10,13 +10,15 @@ namespace Cryptocurrencies.ViewModels
 {
     internal class ConverterVm : ViewModelBase
     {
+        private readonly HttpRequest _httpRequest = new();
         public ConverterVm()
         {
-            SearchCryptocurrencies();
+            Uri url = new($"https://api.coincap.io/v2/assets/");
+             _ = _httpRequest.GetCryptocurrenciesAsync(url, CryptocurrenciesSearched);
             ConvertCommand = new RelayCommand(ConvertCommandExecuted);
         }
 
-        private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched;
+        private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched = [];
         private Cryptocurrency _currencyToConvert;
         private Cryptocurrency _currencyConverted;
         private int _count;
@@ -64,62 +66,18 @@ namespace Cryptocurrencies.ViewModels
             }
         }
 
-        private async void SearchCryptocurrencies()
-        {
-            var searchResults = await GetCryptocurrency();
-            CryptocurrenciesSearched = new ObservableCollection<Cryptocurrency>(searchResults);
-        }
-
-        private static async Task<List<Cryptocurrency>> GetCryptocurrency()
-        {
-            try
-            {
-                using HttpClient client = new();
-                var response = await client.GetStringAsync("https://api.coincap.io/v2/assets");
-                var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse<Cryptocurrency>>(response);
-                return coinCapResponse?.Data ?? [];
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error fetching cryptocurrency data: {ex.Message}");
-                return [];
-            }
-        }
-
         public ICommand ConvertCommand { get; set; }
 
-        private void ConvertCommandExecuted(object obj)
+        private async void ConvertCommandExecuted(object obj)
         {
             if (Count > 0)
             {
-                Convert(CurrencyToConvert.Id, CurrencyConverted.Id, Count);
-            }
-        }
-        private async void Convert(string id, string currency, int count)
-        {
-            try
-            {
-                using HttpClient client = new();
-                var response = await client.GetStringAsync($"https://api.coincap.io/v2/assets/{id}");
-                var coinCapSingleResponse = JsonConvert.DeserializeObject<CoinCapSingleResponse<Cryptocurrency>>(response);
-                var currencyToConvert = coinCapSingleResponse?.Data?.PriceUsd;
+                Uri request = new($"https://api.coincap.io/v2/assets/{CurrencyToConvert.Id}");
+                Uri request2 = new($"https://api.coincap.io/v2/assets/{CurrencyConverted.Id}");
 
-                MessageBox.Show(currencyToConvert.ToString());
+                var result = await _httpRequest.ConvertValue(request, request2, Count);
+                Result = result?.ToString("F2");
 
-
-                using HttpClient client1 = new();
-                var response1 = await client1.GetStringAsync($"https://api.coincap.io/v2/assets/{currency}");
-                var coinCapSingleResponse1 = JsonConvert.DeserializeObject<CoinCapSingleResponse<Cryptocurrency>>(response1);
-                var currencyToConvert1 = coinCapSingleResponse1?.Data?.PriceUsd;
-
-
-
-                Result = (currencyToConvert!.Value / currencyToConvert1!.Value * count).ToString("F2");
-                MessageBox.Show(Result);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error fetching cryptocurrency data: {ex.Message}");
             }
         }
     }

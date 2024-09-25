@@ -8,7 +8,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:tools="clr-namespace:Cryptocurrencies.Tools"
         mc:Ignorable="d"
-        Margin="7"
+        Margin="8"
         Height="480"
         Width="960"
         WindowStyle="None" ResizeMode="CanResizeWithGrip"

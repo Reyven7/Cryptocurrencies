@@ -1,6 +1,8 @@
 ﻿using Cryptocurrencies.Model;
 using Cryptocurrencies.Tools;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Cryptocurrencies.ViewModel
@@ -8,6 +10,7 @@ namespace Cryptocurrencies.ViewModel
     internal class NavigationVm : ViewModelBase
     {
         private readonly SelectedItem _selectedItem = SelectedItem.Instance;
+        private readonly ObservableCollection<Cryptocurrency> _cryptocurrencies = [];
 
         private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched;
         private object _currentView;
@@ -22,6 +25,9 @@ namespace Cryptocurrencies.ViewModel
             SelectCryptoCommand = new RelayCommand(OnCryptoSelected);
 
             CurrentView = new HomeVm();
+
+            Uri url = new("https://api.coincap.io/v2/assets/");
+             _ = HttpRequest.GetCryptocurrenciesAsync(url, _cryptocurrencies);
         }
 
         public object CurrentView
@@ -37,7 +43,7 @@ namespace Cryptocurrencies.ViewModel
             {
                 _searchQuery = value;
                 OnPropertyChanged();
-                SearchCryptocurrencies(SearchQuery);
+                SearchCryptocurrencies(value);
             }
         }
 
@@ -88,8 +94,8 @@ namespace Cryptocurrencies.ViewModel
             SelectedCryptocurrency = crypto;
             _selectedItem.Id = _selectedCryptocurrency.Id;
 
+            SearchQuery = _selectedCryptocurrency.Name;
             IsPopupOpen = false;
-            SearchQuery = null!;
 
             if (CurrentView is DetailsVm detailsVm)
             {
@@ -100,8 +106,7 @@ namespace Cryptocurrencies.ViewModel
                 CurrentView = new DetailsVm();
             }
         }
-
-        private async void SearchCryptocurrencies(string id)
+        private void SearchCryptocurrencies(string id)
         {
             if (string.IsNullOrWhiteSpace(SearchQuery))
             {
@@ -109,10 +114,26 @@ namespace Cryptocurrencies.ViewModel
                 return;
             }
 
-            CryptocurrenciesSearched = [];
-            Uri url = new($"https://api.coincap.io/v2/assets?search={id}");
-            await HttpRequest.GetCryptocurrenciesAsync(url, CryptocurrenciesSearched);
+            CryptocurrenciesSearched = SearchInList(id, _cryptocurrencies);
             IsPopupOpen = CryptocurrenciesSearched.Count > 0;
+        }
+
+        private static ObservableCollection<Cryptocurrency> SearchInList(string query, ObservableCollection<Cryptocurrency> cryptocurrencies)
+        {
+            var searchResult = new ObservableCollection<Cryptocurrency>();
+            query = query.ToLower();
+
+            var filteredCryptocurrencies = cryptocurrencies
+                .Where(c => c.Name.ToLower().Contains(query))
+                .OrderBy(c => !c.Name.ToLower().StartsWith(query))  
+                .ThenBy(c => c.Name);  
+
+            foreach (var cryptocurrency in filteredCryptocurrencies)
+            {
+                searchResult.Add(cryptocurrency);
+            }
+
+            return searchResult;
         }
     }
 }

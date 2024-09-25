@@ -7,7 +7,6 @@ namespace Cryptocurrencies.ViewModel
 {
     internal class NavigationVm : ViewModelBase
     {
-        private readonly HttpRequest _httpRequest = new();
         private readonly SelectedItem _selectedItem = SelectedItem.Instance;
 
         private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched;
@@ -20,7 +19,6 @@ namespace Cryptocurrencies.ViewModel
         {
             HomeCommand = new RelayCommand(Home);
             ConverterCommand = new RelayCommand(Converter);
-            SettingsCommand = new RelayCommand(Settings);
             SelectCryptoCommand = new RelayCommand(OnCryptoSelected);
 
             CurrentView = new HomeVm();
@@ -77,29 +75,29 @@ namespace Cryptocurrencies.ViewModel
 
         public ICommand HomeCommand { get; set; }
         public ICommand ConverterCommand { get; set; }
-        public ICommand SettingsCommand { get; set; }
         public ICommand SelectCryptoCommand { get; }
 
         private void Home(object obg) => CurrentView = new HomeVm();
 
         private void Converter(object obg) => CurrentView = new ConverterVm();
 
-        private void Settings(object obg) => CurrentView = new SettingsVm();
-
         private void OnCryptoSelected(object selectedCrypto)
         {
-            if (selectedCrypto is Cryptocurrency crypto)
+            if (selectedCrypto is not Cryptocurrency crypto) return;
+
+            SelectedCryptocurrency = crypto;
+            _selectedItem.Id = _selectedCryptocurrency.Id;
+
+            IsPopupOpen = false;
+            SearchQuery = null!;
+
+            if (CurrentView is DetailsVm detailsVm)
             {
-                SelectedCryptocurrency = crypto;
-                _selectedItem.SearchItem = _selectedCryptocurrency.Id;
-                if (CurrentView is DetailsVm detailsVm)
-                {
-                    CurrentView = new DetailsVm();
-                }
-                else
-                {
-                    CurrentView = new DetailsVm();
-                }
+                _ = detailsVm.UpdateDetails();
+            }
+            else
+            {
+                CurrentView = new DetailsVm();
             }
         }
 
@@ -113,7 +111,7 @@ namespace Cryptocurrencies.ViewModel
 
             CryptocurrenciesSearched = [];
             Uri url = new($"https://api.coincap.io/v2/assets?search={id}");
-            await _httpRequest.GetCryptocurrenciesAsync(url, CryptocurrenciesSearched);
+            await HttpRequest.GetCryptocurrenciesAsync(url, CryptocurrenciesSearched);
             IsPopupOpen = CryptocurrenciesSearched.Count > 0;
         }
     }

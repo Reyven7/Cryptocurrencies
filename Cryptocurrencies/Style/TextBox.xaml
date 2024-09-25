@@ -6,22 +6,22 @@
 
     <Style x:Key="SearchBoxStyle"
            TargetType="TextBox">
-        <Setter Property="Background" 
-                Value="{DynamicResource TextBoxBackgroundColor}"/>
-        <Setter Property="Foreground" 
-                Value="{DynamicResource TextBoxForegroundColor}"/>
-        <Setter Property="FontSize" 
-                Value="14"/>
-        <Setter Property="BorderThickness" 
-                Value="0"/>
+        <Setter Property="Background"
+                Value="{DynamicResource TextBoxBackgroundColor}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBoxForegroundColor}" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="BorderThickness"
+                Value="0" />
         <Setter Property="Padding"
-                Value="10,0,25,0"/>
-        <Setter Property="VerticalAlignment" 
-                Value="Center"/>
+                Value="10,0,25,0" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
         <Setter Property="Height"
-                Value="25"/>
+                Value="25" />
         <Setter Property="MinWidth"
-                Value="200"/>
+                Value="200" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -32,17 +32,16 @@
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="1.5"
                                 BorderBrush="{DynamicResource TextBoxBorderColor}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
 
-                        <ContentControl 
-                                        Content="{StaticResource SearchIcon}" 
+                        <ContentControl
+                                        Content="{StaticResource SearchIcon}"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Right"
                                         Width="15"
                                         Height="15"
-                                        Margin="10,0,10,0"/>
-                                        
+                                        Margin="10,0,10,0" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -51,22 +50,22 @@
 
     <Style x:Key="TextBoxStyle"
            TargetType="TextBox">
-        <Setter Property="Background" 
-                Value="{DynamicResource TextBoxBackgroundColor}"/>
-        <Setter Property="Foreground" 
-                Value="{DynamicResource TextBoxForegroundColor}"/>
-        <Setter Property="FontSize" 
-                Value="14"/>
-        <Setter Property="BorderThickness" 
-                Value="0"/>
+        <Setter Property="Background"
+                Value="{DynamicResource TextBoxBackgroundColor}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBoxForegroundColor}" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="BorderThickness"
+                Value="0" />
         <Setter Property="Padding"
-                Value="10,0,25,0"/>
-        <Setter Property="VerticalAlignment" 
-                Value="Center"/>
+                Value="10,0,25,0" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
         <Setter Property="Height"
-                Value="20"/>
+                Value="20" />
         <Setter Property="MinWidth"
-                Value="200"/>
+                Value="200" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -77,12 +76,11 @@
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="1.5"
                                 BorderBrush="{DynamicResource TextBoxBorderColor}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

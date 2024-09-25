@@ -1,5 +1,4 @@
-﻿
-using Cryptocurrencies.Model;
+﻿using Cryptocurrencies.Model;
 using Cryptocurrencies.Tools;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
@@ -11,7 +10,6 @@ namespace Cryptocurrencies.ViewModel
 {
     internal class DetailsVm : ViewModelBase
     {
-        private readonly HttpRequest _httpRequest = new();
         public ISeries[]? Series { get; set; }
 
         private ObservableCollection<Cryptocurrency> _selectedCryptocurrency = [];
@@ -35,13 +33,13 @@ namespace Cryptocurrencies.ViewModel
 
         public DetailsVm()
         {
-            if ((SelectedItem.Instance.SearchItem) == string.Empty) return;
-            _ = LoadCryptocurrencyDetails(SelectedItem.Instance.SearchItem);
+            if ((SelectedItem.Instance.Id) == string.Empty) return;
+            _ = LoadCryptocurrencyDetails(SelectedItem.Instance.Id);
         }
 
         public async Task UpdateDetails()
         {
-            await LoadCryptocurrencyDetails(SelectedItem.Instance.SearchItem);
+            await LoadCryptocurrencyDetails(SelectedItem.Instance.Id);
         }
 
         public async Task LoadCryptocurrencyDetails(string id)
@@ -49,8 +47,8 @@ namespace Cryptocurrencies.ViewModel
             Uri request = new($"https://api.coincap.io/v2/assets/{id}");
             Uri marketRequest = new($"https://api.coincap.io/v2/assets/{id}/markets");
 
-            await _httpRequest.GetCryptocurrency(request, SelectedCryptocurrency);
-            await _httpRequest.GetMarkets(marketRequest, Markets);
+            await HttpRequest.GetCryptocurrency(request, SelectedCryptocurrency);
+            await HttpRequest.GetMarkets(marketRequest, Markets);
             await LoadCandlestickData(id);
         }
 
@@ -59,7 +57,7 @@ namespace Cryptocurrencies.ViewModel
             try
             {
                 Uri request = new($"https://api.coingecko.com/api/v3/coins/{id}/ohlc?vs_currency=usd&days=7");
-                var data = await _httpRequest.GetCandlestickData(request);
+                var data = await HttpRequest.GetCandlestickData(request);
 
                 var any = data.Any();
 

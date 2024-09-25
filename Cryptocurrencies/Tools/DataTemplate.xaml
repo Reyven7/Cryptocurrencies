@@ -2,21 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:Cryptocurrencies.ViewModel"
                     xmlns:view="clr-namespace:Cryptocurrencies.View">
-    
+
     <DataTemplate DataType="{x:Type vm:HomeVm}">
-        <view:Home/>
+        <view:Home />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:DetailsVm}">
-        <view:Details/>
+        <view:Details />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:ConverterVm}">
-        <view:CurrencyConvector/>
+        <view:CurrencyConvector />
     </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:SettingsVm}">
-        <view:Settings/>
-    </DataTemplate>
-
 </ResourceDictionary>

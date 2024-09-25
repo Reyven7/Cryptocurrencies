@@ -20,11 +20,11 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="1"
-                       Style="{StaticResource HeaderTextStyle}"
-                       Text="Top Cryptocurrencies"/>
+                       Style="{DynamicResource HeaderTextStyle}"
+                       Text="Top Cryptocurrencies" />
 
             <DataGrid ItemsSource="{Binding Cryptocurrencies}"
-                      Style="{StaticResource DarkDataGridStyle}"
+                      Style="{StaticResource DataGridStyle}"
                       Grid.Row="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Rank"

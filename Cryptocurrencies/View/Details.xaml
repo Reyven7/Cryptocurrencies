@@ -11,7 +11,7 @@
              Style="{StaticResource PageStyle}">
 
     <UserControl.DataContext>
-        <vm:DetailsVm/>
+        <vm:DetailsVm />
     </UserControl.DataContext>
 
     <Grid>
@@ -20,19 +20,19 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="2.5*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="0" ColumnSpan="2" Grid.Column="0" Background="{DynamicResource BackgroundColor}">
-            <lvc:CartesianChart Series="{Binding Series}" 
+            <lvc:CartesianChart Series="{Binding Series}"
                                 ZoomMode="Both"
                                 Background="{DynamicResource BackgroundColor}"
-                                Foreground="Black"/>
+                                Foreground="Black" />
         </Grid>
 
         <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Markets}"
-                  Style="{StaticResource DarkDataGridStyle}">
+                  Style="{StaticResource DataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Market"
                                     Binding="{Binding ExchangeId}"
@@ -40,7 +40,6 @@
                 <DataGridTextColumn Header="Price"
                                     Binding="{Binding PriceUsd, StringFormat=C}"
                                     Width="*" />
-
             </DataGrid.Columns>
         </DataGrid>
 
@@ -52,20 +51,20 @@
             </Grid.RowDefinitions>
             <Grid DataContext="{Binding SelectedCryptocurrency[0]}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Style="{StaticResource HeaderTextStyle}" 
-                           Text="{Binding Name}"/>
+                <TextBlock Style="{StaticResource HeaderTextStyle}"
+                           Text="{Binding Name}" />
                 <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextStyle}">
                     <TextBlock.Inlines>
-                        <Run Text=" Rank"/>
-                        <Run Text="{Binding Rank}"/>
+                        <Run Text=" Rank" />
+                        <Run Text="{Binding Rank}" />
                     </TextBlock.Inlines>
                 </TextBlock>
             </Grid>
             <DataGrid ItemsSource="{Binding SelectedCryptocurrency }"
-                      Style="{StaticResource DarkDataGridStyle}"
+                      Style="{StaticResource DataGridStyle}"
                       Grid.Row="1" Grid.Column="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Price"
@@ -77,21 +76,20 @@
                     <DataGridTextColumn Header="Change % 24Hr"
                                         Binding="{Binding ChangePercent24Hr}"
                                         Width="*" />
-
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid ItemsSource="{Binding SelectedCryptocurrency}"
-                    Style="{StaticResource DarkDataGridStyle}"
+                    Style="{StaticResource DataGridStyle}"
                     Grid.Row="2" Grid.Column="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Supply"
                                       Binding="{Binding Supply, StringFormat=N}"
                                       Width="*" />
                     <DataGridTextColumn Header="Max Supply"
-                                      Binding="{Binding MaxSupply, StringFormat=C}"
+                                      Binding="{Binding MaxSupply, StringFormat=N}"
                                       Width="*" />
                     <DataGridTextColumn Header="Volume 24Hr"
-                                      Binding="{Binding VolumeUsd24Hr}"
+                                      Binding="{Binding VolumeUsd24Hr, StringFormat=C}"
                                       Width="*" />
                 </DataGrid.Columns>
             </DataGrid>

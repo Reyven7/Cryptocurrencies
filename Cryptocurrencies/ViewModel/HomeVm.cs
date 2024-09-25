@@ -7,10 +7,10 @@ namespace Cryptocurrencies.ViewModel
 {
     internal class HomeVm : ViewModelBase
     {
-        private readonly HttpRequest _httpRequest = new();
         public HomeVm() => Task.Run(LoadCryptocurrencyData);
 
         private ObservableCollection<Cryptocurrency> _cryptocurrencies = null!;
+
         public ObservableCollection<Cryptocurrency> Cryptocurrencies
         {
             get => _cryptocurrencies;
@@ -25,7 +25,7 @@ namespace Cryptocurrencies.ViewModel
         {
             Uri request = new("https://api.coincap.io/v2/assets?limit=15");
 
-            var cryptocurrencies = await _httpRequest.GetCryptocurrenciesAsync(request);
+            var cryptocurrencies = await HttpRequest.GetCryptocurrenciesAsync(request);
             if (cryptocurrencies is { Count: > 0 })
             {
                 Cryptocurrencies = new ObservableCollection<Cryptocurrency>(cryptocurrencies);

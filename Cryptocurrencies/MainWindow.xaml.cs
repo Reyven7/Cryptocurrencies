@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 namespace Cryptocurrencies
 {
@@ -32,23 +31,20 @@ namespace Cryptocurrencies
         {
             try
             {
-
                 var themeDictionary = new ResourceDictionary();
                 var handyControlSkin = new ResourceDictionary();
                 var styleDictionary = new ResourceDictionary
                 {
-                    Source = new Uri("Styles/GlobalStyles.xaml", UriKind.Relative)
+                    Source = new Uri("Style/ControlStyles.xaml", UriKind.Relative)
                 };
 
-                themeDictionary.Source = new Uri("Themes/Light.xaml", UriKind.Relative);
+                themeDictionary.Source = new Uri("Theme/Light.xaml", UriKind.Relative);
                 handyControlSkin.Source = new Uri("pack://application:,,,/HandyControl;component/Themes/skindefault.xaml", UriKind.Absolute);
 
-                App.Current.Resources.Clear();
-                App.Current.Resources.MergedDictionaries.Add(styleDictionary);
-                App.Current.Resources.MergedDictionaries.Add(handyControlSkin);
-                App.Current.Resources.MergedDictionaries.Add(themeDictionary);
-
-
+                Application.Current.Resources.Clear();
+                Application.Current.Resources.MergedDictionaries.Add(styleDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(handyControlSkin);
+                Application.Current.Resources.MergedDictionaries.Add(themeDictionary);
             }
             catch (Exception ex)
             {
@@ -60,23 +56,20 @@ namespace Cryptocurrencies
         {
             try
             {
-
                 var themeDictionary = new ResourceDictionary();
                 var handyControlSkin = new ResourceDictionary();
                 var styleDictionary = new ResourceDictionary
                 {
-                    Source = new Uri("Styles/GlobalStyles.xaml", UriKind.Relative)
+                    Source = new Uri("Style/ControlStyles.xaml", UriKind.Relative)
                 };
 
-                themeDictionary.Source = new Uri("Themes/Dark.xaml", UriKind.Relative);
+                themeDictionary.Source = new Uri("Theme/Dark.xaml", UriKind.Relative);
                 handyControlSkin.Source = new Uri("pack://application:,,,/HandyControl;component/Themes/skindark.xaml", UriKind.Absolute);
 
-                App.Current.Resources.Clear();
-                App.Current.Resources.MergedDictionaries.Add(styleDictionary);
-                App.Current.Resources.MergedDictionaries.Add(handyControlSkin);
-                App.Current.Resources.MergedDictionaries.Add(themeDictionary);
-
-
+                Application.Current.Resources.Clear();
+                Application.Current.Resources.MergedDictionaries.Add(styleDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(handyControlSkin);
+                Application.Current.Resources.MergedDictionaries.Add(themeDictionary);
             }
             catch (Exception ex)
             {

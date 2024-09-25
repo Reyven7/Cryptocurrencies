@@ -7,24 +7,23 @@ namespace Cryptocurrencies.ViewModel
 {
     internal class ConverterVm : ViewModelBase
     {
-        private readonly HttpRequest _httpRequest = new();
         public ConverterVm()
         {
             Uri url = new($"https://api.coincap.io/v2/assets/");
-             _ = _httpRequest.GetCryptocurrenciesAsync(url, CryptocurrenciesSearched);
+            _ = HttpRequest.GetCryptocurrenciesAsync(url, CryptocurrenciesSearched);
             ConvertCommand = new RelayCommand(ConvertCommandExecuted);
         }
 
         private ObservableCollection<Cryptocurrency> _cryptocurrenciesSearched = [];
-        private Cryptocurrency _currencyToConvert;
-        private Cryptocurrency _currencyConverted;
+        private Cryptocurrency _currencyToConvert = null!;
+        private Cryptocurrency _currencyConverted = null!;
         private int _count;
         private string? _result;
 
         public string? Result
         {
             get => _result;
-            set { _result = $"{Count} {_currencyToConvert.Name} = {value}, {_currencyConverted.Name}"; OnPropertyChanged();}
+            set { _result = $"{Count} {_currencyToConvert.Name} = {value}, {_currencyConverted.Name}"; OnPropertyChanged(); }
         }
 
         public int Count
@@ -67,15 +66,13 @@ namespace Cryptocurrencies.ViewModel
 
         private async void ConvertCommandExecuted(object obj)
         {
-            if (Count > 0)
-            {
-                Uri request = new($"https://api.coincap.io/v2/assets/{CurrencyToConvert.Id}");
-                Uri request2 = new($"https://api.coincap.io/v2/assets/{CurrencyConverted.Id}");
+            if (Count <= 0) return;
 
-                var result = await _httpRequest.ConvertValue(request, request2, Count);
-                Result = result?.ToString("F2");
+            Uri request = new($"https://api.coincap.io/v2/assets/{CurrencyToConvert.Id}");
+            Uri request2 = new($"https://api.coincap.io/v2/assets/{CurrencyConverted.Id}");
 
-            }
+            var result = await HttpRequest.ConvertValue(request, request2, Count);
+            Result = result?.ToString("F2");
         }
     }
 }

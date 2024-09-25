@@ -18,6 +18,6 @@
             }
         }
 
-        public string SearchItem { get; set; } = string.Empty;
+        public string Id { get; set; } = string.Empty;
     }
 }

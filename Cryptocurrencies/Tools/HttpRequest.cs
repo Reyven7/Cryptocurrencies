@@ -3,13 +3,12 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows;
-using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace Cryptocurrencies.Tools
 {
-    internal class HttpRequest
+    internal static class HttpRequest
     {
-        public async Task GetCryptocurrenciesAsync(Uri request, ObservableCollection<Cryptocurrency> cryptocurrencies)
+        public static async Task GetCryptocurrenciesAsync(Uri request, ObservableCollection<Cryptocurrency> cryptocurrencies)
         {
             try
             {
@@ -31,7 +30,7 @@ namespace Cryptocurrencies.Tools
             }
         }
 
-        public async Task<List<Cryptocurrency>> GetCryptocurrenciesAsync(Uri request)
+        public static async Task<List<Cryptocurrency>> GetCryptocurrenciesAsync(Uri request)
         {
             try
             {
@@ -47,7 +46,7 @@ namespace Cryptocurrencies.Tools
             }
         }
 
-        public async Task GetCryptocurrency(Uri request, ObservableCollection<Cryptocurrency> cryptocurrencies)
+        public static async Task GetCryptocurrency(Uri request, ObservableCollection<Cryptocurrency> cryptocurrencies)
         {
             try
             {
@@ -60,16 +59,14 @@ namespace Cryptocurrencies.Tools
                     cryptocurrencies.Clear();
                     cryptocurrencies.Add(coinCapSingleResponse.Data);
                 }
-
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading cryptocurrency details: {ex.Message}");
             }
         }
 
-        public async Task<Cryptocurrency> GetCryptocurrency(Uri request)
+        public static async Task<Cryptocurrency> GetCryptocurrency(Uri request)
         {
             try
             {
@@ -79,7 +76,6 @@ namespace Cryptocurrencies.Tools
                     JsonConvert.DeserializeObject<CoinCapSingleResponse<Cryptocurrency>>(response);
                 return coinCapSingleResponse?.Data;
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading cryptocurrency details: {ex.Message}");
@@ -88,7 +84,7 @@ namespace Cryptocurrencies.Tools
             return null;
         }
 
-        public async Task GetMarkets(Uri request, ObservableCollection<Market> markets)
+        public static async Task GetMarkets(Uri request, ObservableCollection<Market> markets)
         {
             try
             {
@@ -110,15 +106,15 @@ namespace Cryptocurrencies.Tools
             }
         }
 
-        public async Task<List<Market>> GetMarkets(Uri request)
+        public static async Task<List<Market>> GetMarkets(Uri request)
         {
             using HttpClient client = new();
             var response = await client.GetStringAsync(request);
             var coinCapResponse = JsonConvert.DeserializeObject<CoinCapResponse<Market>>(response);
             return coinCapResponse?.Data ?? [];
-
         }
-        public async Task<List<FinancialData>> GetCandlestickData(Uri request)
+
+        public static async Task<List<FinancialData>> GetCandlestickData(Uri request)
         {
             var financialDataList = new List<FinancialData>();
 
@@ -152,7 +148,7 @@ namespace Cryptocurrencies.Tools
             return financialDataList;
         }
 
-        public async Task<decimal?> ConvertValue(Uri request, Uri request2, int count)
+        public static async Task<decimal?> ConvertValue(Uri request, Uri request2, int count)
         {
             try
             {

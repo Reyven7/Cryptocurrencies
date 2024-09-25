@@ -1,54 +1,54 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="DarkDataGridStyle" TargetType="DataGrid">
-        <Setter Property="Foreground" 
+    <Style x:Key="DataGridStyle" TargetType="DataGrid">
+        <Setter Property="Foreground"
                 Value="{DynamicResource DataGridForegroundColor}" />
-        <Setter Property="FontSize" 
+        <Setter Property="FontSize"
                 Value="16" />
-        <Setter Property="Background" 
+        <Setter Property="Background"
                 Value="{DynamicResource DataGridBackgroundColor}" />
-        <Setter Property="RowBackground" 
+        <Setter Property="RowBackground"
                 Value="{DynamicResource DataGridRowBackgroundColor}" />
-        <Setter Property="AlternatingRowBackground" 
+        <Setter Property="AlternatingRowBackground"
                 Value="{DynamicResource DataGridAlternatingRowBackgroundColor}" />
-        <Setter Property="BorderBrush" 
+        <Setter Property="BorderBrush"
                 Value="{DynamicResource DataGridBorderBrushColor}" />
-        <Setter Property="GridLinesVisibility" 
+        <Setter Property="GridLinesVisibility"
                 Value="None" />
-        <Setter Property="HeadersVisibility" 
+        <Setter Property="HeadersVisibility"
                 Value="Column" />
-        <Setter Property="AutoGenerateColumns" 
+        <Setter Property="AutoGenerateColumns"
                 Value="False" />
-        <Setter Property="CanUserDeleteRows" 
+        <Setter Property="CanUserDeleteRows"
                 Value="False" />
-        <Setter Property="CanUserAddRows" 
+        <Setter Property="CanUserAddRows"
                 Value="False" />
-        <Setter Property="CanUserResizeRows" 
+        <Setter Property="CanUserResizeRows"
                 Value="False" />
         <Setter Property="CanUserReorderColumns"
                 Value="False" />
-        <Setter Property="IsReadOnly" 
+        <Setter Property="IsReadOnly"
                 Value="True" />
         <Setter Property="SelectionUnit"
-                Value="FullRow"/>
+                Value="FullRow" />
         <Setter Property="VerticalScrollBarVisibility"
-                Value="Disabled"/>
+                Value="Disabled" />
         <Setter Property="HorizontalScrollBarVisibility"
-                Value="Disabled"/>
+                Value="Disabled" />
 
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
                 <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" 
+                    <Setter Property="Background"
                             Value="{DynamicResource DataGridBackgroundColor}" />
-                    <Setter Property="Foreground" 
+                    <Setter Property="Foreground"
                             Value="{DynamicResource DataGridForegroundColor}" />
-                    <Setter Property="FontWeight" 
+                    <Setter Property="FontWeight"
                             Value="Bold" />
-                    <Setter Property="HorizontalContentAlignment" 
+                    <Setter Property="HorizontalContentAlignment"
                             Value="Center" />
-                    <Setter Property="Padding" 
+                    <Setter Property="Padding"
                             Value="10,5" />
                 </Style>
             </Setter.Value>
@@ -58,10 +58,10 @@
             <Setter.Value>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
-                        <Trigger Property="IsMouseOver" 
+                        <Trigger Property="IsMouseOver"
                                  Value="True">
-                            <Setter Property="Background" 
-                                    Value="{DynamicResource DataGridMouseOverRowColor}"/>
+                            <Setter Property="Background"
+                                    Value="{DynamicResource DataGridMouseOverRowColor}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -71,9 +71,9 @@
             <Setter.Value>
                 <Style TargetType="DataGridCell">
                     <Setter Property="FontSize"
-                            Value="18"/>
+                            Value="18" />
                     <Setter Property="HorizontalAlignment"
-                            Value="Center"/>
+                            Value="Center" />
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{DynamicResource DataGridSelectedBackgroundColor}" />
@@ -83,7 +83,7 @@
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Background" Value="{DynamicResource DataGridSelectedBackgroundColor}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource DataGridBorderBrushColor}" />
-                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderThickness" Value="1" />
                             <Setter Property="Foreground" Value="{DynamicResource DataGridForegroundColor}" />
                         </Trigger>
                     </Style.Triggers>

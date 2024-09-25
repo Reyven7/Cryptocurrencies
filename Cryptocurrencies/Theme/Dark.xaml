@@ -3,7 +3,7 @@
 
     <SolidColorBrush x:Key="BackgroundColor">#0D0D0D</SolidColorBrush>
     <SolidColorBrush x:Key="MenuBackgroundColor">#0D0D0D</SolidColorBrush>
-    
+
     <!-- Button -->
     <Color x:Key="ButtonBackgroundColor">#0D0D0D</Color>
     <Color x:Key="ButtonMouseEnterColor">#3E434A</Color>
@@ -40,5 +40,6 @@
     <SolidColorBrush x:Key="TextBlockForegroundColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="NavButtonForegroundColor">White</SolidColorBrush>
 
-
+    <!--TextBox-->
+    <SolidColorBrush x:Key="HeaderTextForegroundColor">White</SolidColorBrush>
 </ResourceDictionary>

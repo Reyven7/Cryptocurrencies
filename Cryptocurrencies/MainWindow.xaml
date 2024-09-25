@@ -7,15 +7,15 @@
         xmlns:viewModels="clr-namespace:Cryptocurrencies.ViewModel"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:tools="clr-namespace:Cryptocurrencies.Tools"
-        mc:Ignorable="d" 
+        mc:Ignorable="d"
         Margin="7"
-        Height="480" 
-        Width="960" 
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" 
+        Height="480"
+        Width="960"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True">
 
     <Window.DataContext>
-        <viewModels:NavigationVm/>
+        <viewModels:NavigationVm />
     </Window.DataContext>
 
     <Window.Resources>
@@ -23,27 +23,27 @@
     </Window.Resources>
 
     <WindowChrome.WindowChrome>
-            <WindowChrome CaptionHeight="5" ResizeBorderThickness="3"/>
-        </WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="5" ResizeBorderThickness="3" />
+    </WindowChrome.WindowChrome>
 
-       <Grid Background="{DynamicResource BackgroundColor}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" MinHeight="35"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+    <Grid Background="{DynamicResource BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" MinHeight="35" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-            <Grid.ContextMenu>
-                <ContextMenu>
-                <MenuItem Header="light" Click="LightTheme_OnClick"/>
-                    <MenuItem Header="Dark" Click="DarkTheme_OnClick"/>
-                </ContextMenu>
-            </Grid.ContextMenu>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="light" Click="LightTheme_OnClick" />
+                <MenuItem Header="Dark" Click="DarkTheme_OnClick" />
+            </ContextMenu>
+        </Grid.ContextMenu>
 
         <Grid Grid.Row="0" Background="{DynamicResource MenuBackgroundColor}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
 
@@ -52,9 +52,8 @@
                                     IsChecked="True">
                     <Grid>
                         <TextBlock Style="{StaticResource TextStyle}"
-                                       Text="Home"/>
+                                       Text="Home" />
                     </Grid>
-
                 </tools:NavButton>
 
                 <tools:NavButton Style="{StaticResource NavButtonStyle}"
@@ -62,17 +61,7 @@
                                     IsChecked="False">
                     <Grid>
                         <TextBlock Style="{StaticResource TextStyle}"
-                                       Text="Converter"/>
-                    </Grid>
-
-                </tools:NavButton>
-
-                <tools:NavButton Style="{StaticResource NavButtonStyle}"
-                                    Command="{Binding SettingsCommand}"
-                                    IsChecked="False">
-                    <Grid>
-                        <TextBlock Style="{StaticResource TextStyle}"
-                                       Text="Settings"/>
+                                       Text="Converter" />
                     </Grid>
                 </tools:NavButton>
             </StackPanel>
@@ -80,11 +69,11 @@
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBox x:Name="SearchBox"
                              Style="{StaticResource SearchBoxStyle}"
-                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" 
-                             Margin="0,10,0,5"/>
+                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="0,10,0,5" />
 
                 <Popup IsOpen="{Binding IsPopupOpen, Mode=TwoWay}"
-                           PlacementTarget="{Binding ElementName=SearchBox}" 
+                           PlacementTarget="{Binding ElementName=SearchBox}"
                            StaysOpen="False">
                     <ListBox ItemsSource="{Binding CryptocurrenciesSearched}"
                                  SelectedItem="{Binding SelectedCryptocurrency, Mode=TwoWay }"
@@ -94,33 +83,32 @@
 
                         <hc:Interaction.Triggers>
                             <hc:EventTrigger EventName="SelectionChanged">
-                                <hc:InvokeCommandAction Command="{Binding SelectCryptoCommand}" 
-                                                            CommandParameter="{Binding SelectedCryptocurrency}"/>
+                                <hc:InvokeCommandAction Command="{Binding SelectCryptoCommand}"
+                                                            CommandParameter="{Binding SelectedCryptocurrency}" />
                             </hc:EventTrigger>
                         </hc:Interaction.Triggers>
                     </ListBox>
                 </Popup>
-
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2">
                 <Button
-                            Style="{StaticResource IconButtonStyle}" 
-                            Tag="{StaticResource CollapseIcon}" 
-                            Click="CollapseButton_Click"/>
-                <Button 
-                            Style="{StaticResource IconButtonStyle}" 
+                            Style="{StaticResource IconButtonStyle}"
+                            Tag="{StaticResource CollapseIcon}"
+                            Click="CollapseButton_Click" />
+                <Button
+                            Style="{StaticResource IconButtonStyle}"
                             Tag="{StaticResource FullscreenIcon}"
-                            Click="FullScreenButton_Click"/>
-                <Button 
-                            Style="{StaticResource IconButtonStyle}" 
+                            Click="FullScreenButton_Click" />
+                <Button
+                            Style="{StaticResource IconButtonStyle}"
                             Tag="{StaticResource CloseIcon}"
-                            Click="CloseButton_Click"/>
+                            Click="CloseButton_Click" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <ContentControl x:Name="Pages" Content="{Binding CurrentView}"/>
+            <ContentControl x:Name="Pages" Content="{Binding CurrentView}" />
         </Grid>
-    </Grid> 
+    </Grid>
 </Window>

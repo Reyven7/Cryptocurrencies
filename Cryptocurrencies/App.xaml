@@ -7,10 +7,10 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/skindefault.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/skindefault.xaml"/>
                 <ResourceDictionary Source="Style/ControlStyles.xaml"/>
-                
                 <ResourceDictionary Source="Theme/Light.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
+             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModel"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d"
-
+             Background="{DynamicResource BackgroundColor}"
              d:DesignHeight="480" d:DesignWidth="960"
-             Style="{StaticResource Page_Style}">
+             Style="{StaticResource PageStyle}">
 
     <UserControl.DataContext>
-        <vm:DetailsVm />
+        <vm:DetailsVm/>
     </UserControl.DataContext>
 
     <Grid>
@@ -24,14 +24,14 @@
             <ColumnDefinition Width="2.5*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" ColumnSpan="2" Grid.Column="0" Background="Black">
+        <Grid Grid.Row="0" ColumnSpan="2" Grid.Column="0" Background="{DynamicResource BackgroundColor}">
             <lvc:CartesianChart Series="{Binding Series}" 
                                 ZoomMode="Both"
-                                Background="Black"/>
+                                Background="{DynamicResource BackgroundColor}"
+                                Foreground="Black"/>
         </Grid>
 
         <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Markets}"
-                  VerticalScrollBarVisibility="Disabled"
                   Style="{StaticResource DarkDataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Market"
@@ -44,13 +44,13 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Background="{DynamicResource TextBackGround}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid DataContext="{Binding SelectedCryptocurrency[0]}" Background="Black">
+            <Grid DataContext="{Binding SelectedCryptocurrency[0]}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

@@ -3,16 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModels"
+             xmlns:vm="clr-namespace:Cryptocurrencies.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
-             Style="{StaticResource Page_Style}">
-
+             Style="{StaticResource PageStyle}">
     <UserControl.DataContext>
-        <vm:HomeVm />
+        <vm:HomeVm></vm:HomeVm>
     </UserControl.DataContext>
 
-    <Grid Background="Black">
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -21,14 +20,11 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="1"
-                       Style="{StaticResource TextStyle}"
-                       Text="Top Cryptocurrencies"
-                       FontSize="24" Margin="0,0,3,0" />
+                       Style="{StaticResource HeaderTextStyle}"
+                       Text="Top Cryptocurrencies"/>
 
             <DataGrid ItemsSource="{Binding Cryptocurrencies}"
                       Style="{StaticResource DarkDataGridStyle}"
-                      VerticalScrollBarVisibility="Disabled"
-                      HorizontalScrollBarVisibility="Disabled"
                       Grid.Row="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Rank"
@@ -43,7 +39,6 @@
                     <DataGridTextColumn Header="Supply"
                                         Binding="{Binding Supply, StringFormat=N}"
                                         Width="2*" />
-
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

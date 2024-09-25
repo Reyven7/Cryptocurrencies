@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Cryptocurrencies.View
 {
     /// <summary>
-    /// Interaction logic for Converter.xaml
+    /// Interaction logic for CurrencyConvector.xaml
     /// </summary>
-    public partial class Converter : UserControl
+    public partial class CurrencyConvector : UserControl
     {
-        public Converter()
+        public CurrencyConvector()
         {
             InitializeComponent();
         }

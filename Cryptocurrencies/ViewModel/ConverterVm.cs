@@ -1,12 +1,9 @@
-﻿using Cryptocurrencies.Models;
-using Cryptocurrencies.Utilities;
-using Newtonsoft.Json;
+﻿using Cryptocurrencies.Model;
+using Cryptocurrencies.Tools;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Windows;
 using System.Windows.Input;
 
-namespace Cryptocurrencies.ViewModels
+namespace Cryptocurrencies.ViewModel
 {
     internal class ConverterVm : ViewModelBase
     {

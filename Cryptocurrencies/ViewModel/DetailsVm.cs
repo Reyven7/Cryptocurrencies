@@ -1,12 +1,13 @@
-﻿using Cryptocurrencies.Models;
-using Cryptocurrencies.Utilities;
+﻿
+using Cryptocurrencies.Model;
+using Cryptocurrencies.Tools;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace Cryptocurrencies.ViewModels
+namespace Cryptocurrencies.ViewModel
 {
     internal class DetailsVm : ViewModelBase
     {
@@ -48,13 +49,9 @@ namespace Cryptocurrencies.ViewModels
             Uri request = new($"https://api.coincap.io/v2/assets/{id}");
             Uri marketRequest = new($"https://api.coincap.io/v2/assets/{id}/markets");
 
-
             await _httpRequest.GetCryptocurrency(request, SelectedCryptocurrency);
-            OnPropertyChanged(nameof(SelectedCryptocurrency));
             await _httpRequest.GetMarkets(marketRequest, Markets);
             await LoadCandlestickData(id);
-
-            MessageBox.Show(SelectedCryptocurrency[0].Name);
         }
 
         private async Task LoadCandlestickData(string id)

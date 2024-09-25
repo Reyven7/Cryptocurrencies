@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Cryptocurrencies.Utilities
+namespace Cryptocurrencies.Tools
 {
     internal class RelayCommand(Action<object> execute, Func<object, bool>? canExecute = null)
         : ICommand

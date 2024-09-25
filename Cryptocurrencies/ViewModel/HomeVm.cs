@@ -1,9 +1,9 @@
-﻿using Cryptocurrencies.Models;
-using Cryptocurrencies.Utilities;
+﻿using Cryptocurrencies.Model;
+using Cryptocurrencies.Tools;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace Cryptocurrencies.ViewModels
+namespace Cryptocurrencies.ViewModel
 {
     internal class HomeVm : ViewModelBase
     {

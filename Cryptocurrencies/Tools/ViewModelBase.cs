@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Cryptocurrencies.Utilities
+namespace Cryptocurrencies.Tools
 {
     internal class ViewModelBase : INotifyPropertyChanged
     {

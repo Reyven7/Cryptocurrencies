@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Cryptocurrencies.Utilities
+namespace Cryptocurrencies.Tools
 {
     public class NavButton : RadioButton
     {

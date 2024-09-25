@@ -1,4 +1,4 @@
-﻿namespace Cryptocurrencies.Models
+﻿namespace Cryptocurrencies.Model
 {
     public class CoinCapSingleResponse<T>
     {

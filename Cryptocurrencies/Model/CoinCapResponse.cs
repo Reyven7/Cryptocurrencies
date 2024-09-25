@@ -1,4 +1,4 @@
-﻿namespace Cryptocurrencies.Models
+﻿namespace Cryptocurrencies.Model
 {
     internal class CoinCapResponse<T>
     {

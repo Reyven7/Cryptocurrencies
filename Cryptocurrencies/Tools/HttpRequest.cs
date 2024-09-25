@@ -1,11 +1,11 @@
-﻿using Cryptocurrencies.Models;
+﻿using Cryptocurrencies.Model;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows;
 using static SkiaSharp.HarfBuzz.SKShaper;
 
-namespace Cryptocurrencies.Utilities
+namespace Cryptocurrencies.Tools
 {
     internal class HttpRequest
     {

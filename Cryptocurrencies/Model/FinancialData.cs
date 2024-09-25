@@ -1,4 +1,4 @@
-﻿namespace Cryptocurrencies.Models
+﻿namespace Cryptocurrencies.Model
 {
     internal class FinancialData(DateTime date, double high, double open, double close, double low)
     {

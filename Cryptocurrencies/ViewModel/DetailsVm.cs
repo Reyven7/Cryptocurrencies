@@ -41,7 +41,6 @@ namespace Cryptocurrencies.ViewModel
         {
             await LoadCryptocurrencyDetails(SelectedItem.Instance.Id);
         }
-
         public async Task LoadCryptocurrencyDetails(string id)
         {
             Uri request = new($"https://api.coincap.io/v2/assets/{id}");

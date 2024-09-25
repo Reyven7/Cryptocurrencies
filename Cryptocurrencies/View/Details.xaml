@@ -6,7 +6,6 @@
              xmlns:vm="clr-namespace:Cryptocurrencies.ViewModel"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d"
-             Background="{DynamicResource BackgroundColor}"
              d:DesignHeight="480" d:DesignWidth="960"
              Style="{StaticResource PageStyle}">
 

@@ -55,9 +55,9 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Style="{StaticResource HeaderTextStyle}"
                            Text="{Binding Name}" />
-                <TextBlock Grid.Column="1" Style="{StaticResource SubtitleTextStyle}">
+                <TextBlock Grid.Column="1" Style="{StaticResource HeaderTextStyle}">
                     <TextBlock.Inlines>
-                        <Run Text=" Rank" />
+                        <Run Text="Rank" />
                         <Run Text="{Binding Rank}" />
                     </TextBlock.Inlines>
                 </TextBlock>

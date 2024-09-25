@@ -33,7 +33,7 @@ namespace Cryptocurrencies.ViewModel
 
         public DetailsVm()
         {
-            if ((SelectedItem.Instance.Id) == string.Empty) return;
+            if (SelectedItem.Instance.Id == string.Empty) return;
             _ = LoadCryptocurrencyDetails(SelectedItem.Instance.Id);
         }
 
@@ -41,6 +41,7 @@ namespace Cryptocurrencies.ViewModel
         {
             await LoadCryptocurrencyDetails(SelectedItem.Instance.Id);
         }
+
         public async Task LoadCryptocurrencyDetails(string id)
         {
             Uri request = new($"https://api.coincap.io/v2/assets/{id}");

@@ -1,9 +1,9 @@
 ﻿using Cryptocurrencies.Model;
 using Cryptocurrencies.Tools;
-using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
+using HandyControl.Controls;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Cryptocurrencies.ViewModel
 {
